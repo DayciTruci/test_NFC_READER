@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         if (tag != null) {
             String id = bytesToHex(tag.getId());
-            Toast.makeText(this, "읽은 아이디: " + id, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "읽은 아이디: " + id, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
             // PendingIntent 생성
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE);
 
             // Foreground Dispatch 설정
             nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
@@ -64,7 +64,6 @@ public class MainActivity extends Activity {
             nfcAdapter.disableForegroundDispatch(this);
         }
     }
-
     /**
      * 바이트 배열을 16진수 문자열로 변환하는 메소드
      *
@@ -79,4 +78,3 @@ public class MainActivity extends Activity {
         return sb.toString();
     }
 }
-
